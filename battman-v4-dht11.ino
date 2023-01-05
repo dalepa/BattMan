@@ -1,5 +1,7 @@
 /*
- DLP 2023
+DLP 2023
+Updates:
+        20230105 - UPdated offset with actual observed value         
 Name: BattMan 
 Board: Heltec ESP32v2 LORA+WIFI
 Description:  Read voltage from 23 voltage sensor and send it to UDP inflUX on aws

@@ -1,4 +1,10 @@
 /*
+    DLP 20230111
+    Changelog
+        Added DNS
+*/
+
+/*
   PID  0xA043      -- Product ID for BlueSolar MPPT 100/15
   FW  119     -- Firmware version of controller, v1.19
   SER#  HQXXXXXXXXX   -- Serial number
@@ -58,9 +64,14 @@ const char* password = "olivia15";
 
 //UDP
 int port = 8089;
-byte host[] = {18, 191, 146, 167};
+const char *influxDNS = "bi.pancamo.com";
+IPAddress influxIP;
+// byte host[] = {18, 191, 146, 167};
 // bi.pancamo.com 18.191.146.167
+
 WiFiUDP udp;
+
+
 
 int sampleCnt = 0;
 
@@ -83,6 +94,14 @@ void setup() {
         delay(800);
         Serial.print(".");
     }
+
+  
+    if (WiFi.hostByName(influxDNS, influxIP)) {
+      Serial.print("Influx IP: ");
+      Serial.println(influxIP);
+    } else {
+      Serial.println("DNS lookup failed for " + String(influxDNS));
+    }
 }
 
 
@@ -91,7 +110,7 @@ void toInflux (String line)
 
       Serial.println(line);
 
-      udp.beginPacket(host, port);
+      udp.beginPacket(influxIP, port);
       udp.print(line);
       udp.endPacket();
   
@@ -141,7 +160,7 @@ void loop() {
     if (sampleCnt <= 4)
     {
       data[sampleCnt][key] = svalue.toInt();
-      //Serial.println("Cnt=" + String(sampleCnt) + "  key: " + key + " Value=" + svalue );
+      Serial.println("Cnt=" + String(sampleCnt) + "  key: " + key + " Value=" + svalue );
     }
     else
     {
@@ -179,7 +198,6 @@ void loop() {
 
       sampleCnt=0;
     }      
-
 
 }
 

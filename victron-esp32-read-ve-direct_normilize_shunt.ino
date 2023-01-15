@@ -4,7 +4,7 @@
         Added DNS
 */
 
-/*
+/*  need shunt codes
   PID  0xA043      -- Product ID for BlueSolar MPPT 100/15
   FW  119     -- Firmware version of controller, v1.19
   SER#  HQXXXXXXXXX   -- Serial number
@@ -109,11 +109,11 @@ void toInflux (String line)
 {
 
       Serial.println(line);
-/*
+
       udp.beginPacket(influxIP, port);
       udp.print(line);
       udp.endPacket();
-  */
+  
 
 
 }
@@ -167,69 +167,105 @@ void loop() {
       //tempToInflux();
 
       int value = medianData(data, "V");      
-      String line = String("BattMan.victron.HQ2212CHJG2-shunt.battery.voltage value=" + String(value/1000.0));
+      String line = String("BattMan.victron.HQ2212CHJG2.shunt.battery.voltage value=" + String(value/1000.0));
       toInflux(line);
 
       value = medianData(data, "I");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.battery.current value=" + String(value/1000.0));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.battery.current value=" + String(value/1000.0));
       toInflux(line);
 
       value = medianData(data, "P");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.solar.P value=" + String(value/1000.0));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.P value=" + String(value));
       toInflux(line);
 
-      value = medianData(data, "PPV");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.solar.power value=" + String(value));
+      value = medianData(data, "SOC");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.SOC value=" + String(value/10.0));
       toInflux(line);
 
 
       value = medianData(data, "CE");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.CE value=" + String(value));
-      toInflux(line);
-
-
-      
-      value = medianData(data, "H7");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H7 value=" + String(value));
-      toInflux(line);
-      value = medianData(data, "H8");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H8 value=" + String(value));
-      toInflux(line);
-
-      value = medianData(data, "H4");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H4 value=" + String(value));
-      toInflux(line);
-
-      value = medianData(data, "H10");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H10 value=" + String(value));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.CE value=" + String(value));
       toInflux(line);
 
       value = medianData(data, "AR");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.AR=" + String(value));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.AR value=" + String(value));
       toInflux(line);
 
+      value = medianData(data, "MON");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.MON value=" + String(value));
+      toInflux(line);
+
+
+      value = medianData(data, "TTG");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.TTG value=" + String(value));
+      toInflux(line);
+
+
+
       value = medianData(data, "H1");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H1 value=" + String(value));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H1 value=" + String(value));
       toInflux(line);
 
       value = medianData(data, "H2");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H2 value=" + String(value));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H2 value=" + String(value));
       toInflux(line);
 
-      value = medianData(data, "H18");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H18 value=" + String(value));
+      value = medianData(data, "H4");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H4 value=" + String(value));
       toInflux(line);
 
-      value = medianData(data, "H17");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H17 value=" + String(value));
+      value = medianData(data, "H5");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H5 value=" + String(value));
       toInflux(line);
 
-      value = medianData(data, "SOC");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.SOC value=" + String(value/10));
+      
+      value = medianData(data, "H6");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H6 value=" + String(value));
+      toInflux(line);
+
+          
+      value = medianData(data, "H7");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H7 value=" + String(value));
+      toInflux(line);
+
+      value = medianData(data, "H8");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H8 value=" + String(value));
+      toInflux(line);
+
+
+      value = medianData(data, "H9");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H9 value=" + String(value));
+      toInflux(line);
+
+      
+
+      value = medianData(data, "H10");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H10 value=" + String(value));
       toInflux(line);
       
+      value = medianData(data, "H11");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H11 value=" + String(value));
+      toInflux(line);
+      
+      value = medianData(data, "H12");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H12 value=" + String(value));
+      toInflux(line);
+
+      value = medianData(data, "H15");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H15 value=" + String(value));
+      toInflux(line);
+            
+
+      value = medianData(data, "H16");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H16 value=" + String(value));
+      toInflux(line);
+
       value = medianData(data, "H17");
-      line = String("BattMan.victron.HQ2212CHJG2-shunt.H17 value=" + String(value));
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H17 value=" + String(value));
+      toInflux(line);
+    
+      value = medianData(data, "H18");
+      line = String("BattMan.victron.HQ2212CHJG2.shunt.H18 value=" + String(value));
       toInflux(line);
 
       sampleCnt=0;

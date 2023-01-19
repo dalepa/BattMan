@@ -1,0 +1,2 @@
+Battman CC ESP32  esp32-771244  192.168.0.60
+Battman Shunt esp32-600928  IP192.168.0.62
